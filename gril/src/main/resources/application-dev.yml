@@ -1,0 +1,10 @@
+server:
+  port: 8082
+  #context-path: /girl #端口
+#cupSize: B
+#age: 18
+#content: "cupSize:${cupSize},age:${age}"
+girl:
+  cupSize: B
+  age: 18
+  sex: girl
