@@ -13,6 +13,7 @@ public class GirlProperties {
     private String cupSize;
     private Integer age;
     private String sex;
+    private Double money;
 
     public String getCupSize() {
         return cupSize;
@@ -36,5 +37,13 @@ public class GirlProperties {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 }

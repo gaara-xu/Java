@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Gaara_Xu on 2017/9/4.
@@ -21,7 +22,16 @@ public class Gril {
 
     private String sex;
 
+    @NotNull (message = "金额必传")
+    private Double money;
 
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
+    }
     public Gril(){
 
     }
@@ -56,5 +66,15 @@ public class Gril {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "Gril{" +
+                "id=" + id +
+                ", cupSize='" + cupSize + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                '}';
     }
 }

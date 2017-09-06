@@ -1,7 +1,12 @@
 package com.src.controller;
 
+import com.src.domain.Result;
 import com.src.repository.GirlRepository;
 import com.src.domain.Gril;
+import com.src.service.GirlService;
+import com.src.utils.ResultUtil;
+import com.sun.corba.se.spi.orbutil.fsm.Guard;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +21,9 @@ import java.util.List;
 public class GirlController {
     @Autowired
     private GirlRepository girlRepository;
+    @Autowired
+    private GirlService girlService;
+
     @GetMapping(value = "getAllGirl")
     public List<Gril> girllist(){
         return girlRepository.findAll();
@@ -34,6 +42,8 @@ public class GirlController {
         gril.setCupSize(gril.getCupSize());
         gril.setAge(gril.getAge());
         gril.setSex("1");
+        gril.setMoney(gril.getMoney());
+        System.out.println(gril.getMoney()+"========");
         return girlRepository.save(gril);
     }
     //删
@@ -58,4 +68,41 @@ public class GirlController {
     public List<Gril> selectbyage(@RequestParam(value = "age")Integer age){
         return girlRepository.findByAge(age);
     }
+
+
+
+    @PostMapping(value = "newg")
+    public Result<Gril> girlll(@Valid Gril gril,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            Result result = new Result();
+            result.setCode(1);
+            result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+            result.setData(null);
+            return result;
+        }
+
+        Result result = new Result();
+        result.setCode(1);
+        result.setMsg("成功");
+        result.setData(null);
+        return result;
+    }
+
+    @PostMapping(value = "testutil")
+    public Result<Gril> testutil(@Valid Gril gril,BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+        }
+        gril.setCupSize(gril.getCupSize());
+        gril.setAge(gril.getAge());
+        gril.setSex("1");
+        gril.setMoney(gril.getMoney());
+        return ResultUtil.success(girlRepository.save(gril));
+    }
+
+    @GetMapping(value = "getage/{id}")
+    public void getage(@PathVariable("id")Integer id)throws Exception{
+        girlService.getage(id);
+    }
+
 }
