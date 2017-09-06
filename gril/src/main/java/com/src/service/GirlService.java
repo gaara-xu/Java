@@ -49,4 +49,10 @@ public class GirlService {
         }
 
     }
+
+    public String getcupSize(Integer id){
+        Gril gril = new Gril();
+        gril.setId(id);
+        return gril.getCupSize();
+    }
 }
